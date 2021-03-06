@@ -8,21 +8,6 @@ export const getUsers = () => {
     // });
 };
 
-export const getJoke = () => {
-  return fetch("https://icanhazdadjoke.com/", {
-    method: "Get",
-    headers: {
-      "Accept": "application/json",
-    }
-  })
-  .then((response) => response.json()
-  );
-  // .then(parsedResponse => {
-  //     // do something with response here
-  //     return parsedResponse;
-  // })
-};
-
 
 export const getPosts = () => {
 
