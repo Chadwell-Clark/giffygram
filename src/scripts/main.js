@@ -1,6 +1,6 @@
 import {getUsers , getPosts, getJoke} from "./data/DataManager.js";
 import { PostList } from "./feed/PostList.js";
-import { Joke } from "./feed/Joke.js";
+
 /**
  * Main logic module for what should happen on initial page load for Giffygram
  */
@@ -17,14 +17,7 @@ const showPostList = () => {
 	})
 }
 
-const dadJoke = () => {
-    const postElement = document.querySelector(".joke");
-    getJoke().then(joke => {
-        console.log("This is a DAD joke", joke)
-        postElement.innerHTML = Joke(joke);
-    });
-}
-document.querySelector(".joke-button").addEventListener("click", dadJoke);
+
 /*
     This function performs one, specific task.
 
@@ -49,3 +42,6 @@ const startGiffyGram = () => {
 
 // Are you defining the function here or invoking it?
 startGiffyGram();
+
+
+
