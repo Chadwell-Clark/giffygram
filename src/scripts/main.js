@@ -1,4 +1,4 @@
-import {getUsers , getPosts, getJoke} from "./data/DataManager.js";
+import { getUsers, getPosts } from "./data/DataManager.js";
 import { PostList } from "./feed/PostList.js";
 
 /**
@@ -12,11 +12,10 @@ import { PostList } from "./feed/PostList.js";
 
 const showPostList = () => {
   const postElement = document.querySelector(".postList");
-	getPosts().then((allPosts) => {
-		postElement.innerHTML = PostList(allPosts);
-	})
-}
-
+  getPosts().then((allPosts) => {
+    postElement.innerHTML = PostList(allPosts);
+  });
+};
 
 /*
     This function performs one, specific task.
@@ -25,8 +24,8 @@ const showPostList = () => {
     2. Are you defining the function here or invoking it?
 */
 const startGiffyGram = () => {
-    showPostList();
-}
+  showPostList();
+};
 
 // const startGiffyGram = () => {
 //   postElement.innerHTML = "Hello Cohort 47";
@@ -42,6 +41,3 @@ const startGiffyGram = () => {
 
 // Are you defining the function here or invoking it?
 startGiffyGram();
-
-
-
