@@ -1,43 +1,45 @@
 import { getUsers, getPosts } from "./data/DataManager.js";
 import { PostList } from "./feed/PostList.js";
+import { NavBar } from "./nav/NavBar.js";
+import { Footer } from "./footer/Footer.js";
 
-/**
- * Main logic module for what should happen on initial page load for Giffygram
- */
+const EventElement = document.querySelector(".giffygram");
 
-//Get a reference to the location on the DOM where the app will display
-// const postElement = document.querySelector(".postList");
-// const navElement = document.querySelector("nav");
-// const entryElement = document.querySelector(".entryForm");
+EventElement.addEventListener("click", event => {
+  // console.log("event.target.id", event.target.id);
+  if (event.target.id === "logout") {
+    console.log("What did you do that for? You clicked on logout")
+  }
+})
 
 const showPostList = () => {
+  // Get DOM reference and save in a variable
   const postElement = document.querySelector(".postList");
   getPosts().then((allPosts) => {
     postElement.innerHTML = PostList(allPosts);
   });
 };
 
-/*
-    This function performs one, specific task.
+const showNavBar = () => {
+  // Get DOM reference and save in a variable
+  const DOMTarget = document.querySelector("nav");
+  DOMTarget.innerHTML = NavBar();
+}
 
-    1. Can you explain what that task is?
-    2. Are you defining the function here or invoking it?
-*/
+const showFooter = () => {
+  // Get DOM reference and save in a variable
+  const potato = document.querySelector("footer");
+  console.log(Footer());
+  potato.innerHtml = Footer();
+}
+
+
+
 const startGiffyGram = () => {
+  showNavBar();
   showPostList();
+  showFooter();
 };
 
-// const startGiffyGram = () => {
-//   postElement.innerHTML = "Hello Cohort 47";
-//   getUsers()
-//   .then(hotdog=> {
-//       console.log("UserData: ", hotdog)
-//   })
 
-//   getPosts().then((hotdog) => {
-//     console.log("PostData: ", hotdog);
-//   });
-// };
-
-// Are you defining the function here or invoking it?
 startGiffyGram();
