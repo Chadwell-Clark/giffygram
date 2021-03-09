@@ -12,6 +12,33 @@ EventElement.addEventListener("click", event => {
   }
 })
 
+EventElement.addEventListener("change", event => {
+  if (event.target.id === "yearSelection") {
+    const yearAsNumber = parseInt(event.target.value)
+    console.log(`User wants to see posts since ${yearAsNumber}`);
+  }
+})
+
+EventElement.addEventListener("click", event => {
+  if (event.target.id === "directMessageIcon") {
+    alert("!*! Warning this computer is infected with CIA !*!")
+  }
+})
+
+EventElement.addEventListener("click", event => {
+  if(event.target.id === "default") {
+    alert("Peanut Butter Fingers!!!")
+  }
+})
+
+EventElement.addEventListener("click", event => {
+  if (event.target.id.startsWith("edit")) {
+    console.log("post clicked", event.target.id.split("--"))
+    console.log("The ID is: ", event.target.id.split("--")[1])
+
+  }
+})
+
 const showPostList = () => {
   // Get DOM reference and save in a variable
   const postElement = document.querySelector(".postList");
@@ -28,9 +55,9 @@ const showNavBar = () => {
 
 const showFooter = () => {
   // Get DOM reference and save in a variable
-  const potato = document.querySelector("footer");
+  const DOMTarget = document.querySelector("footer");
   console.log(Footer());
-  potato.innerHtml = Footer();
+  DOMTarget.innerHTML = Footer();
 }
 
 
