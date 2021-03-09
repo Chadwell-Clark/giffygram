@@ -32,6 +32,7 @@ EventElement.addEventListener("click", event => {
 })
 
 EventElement.addEventListener("click", event => {
+  console.log(event.target);
   if (event.target.id.startsWith("edit")) {
     console.log("post clicked", event.target.id.split("--"))
     console.log("The ID is: ", event.target.id.split("--")[1])
