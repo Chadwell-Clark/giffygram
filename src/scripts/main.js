@@ -41,11 +41,15 @@ const showFilteredPosts = (year) => {
   })
   postElement.innerHTML = PostList(filteredData);
 }
+
+let postTotal = "";
 const showPostList = () => {
   // Get DOM reference and save in a variable
-
   getPosts().then((allPosts) => {
+    postTotal = allPosts.length;
+    console.log(postTotal);
     postElement.innerHTML = PostList(allPosts);
+    return postTotal;
   });
 };
 
@@ -55,20 +59,18 @@ const showNavBar = () => {
   DOMTarget.innerHTML = NavBar();
 }
 
-const showFooter = () => {
+const showFooter = (postTotal) => {
   // Get DOM reference and save in a variable
   const DOMTarget = document.querySelector("footer");
-  console.log(Footer());
-  DOMTarget.innerHTML = Footer();
+  console.log(postTotal);
+  console.log(Footer(postTotal));
+  DOMTarget.innerHTML = Footer(postTotal);
 }
-
-
 
 const startGiffyGram = () => {
   showNavBar();
   showPostList();
-  showFooter();
+  showFooter(postTotal);
 };
-
 
 startGiffyGram();

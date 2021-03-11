@@ -1,4 +1,4 @@
-export const Footer = () => {
+export const Footer = (postTotal) => {
   // HTML to be returned to GiffyGram component
   return `
     <div class="footer__item">
@@ -8,7 +8,7 @@ export const Footer = () => {
             <option>2018</option>
             <option>2017</option>
         </select>
-        <span id="postCount">0</span>
+        <span id="postCount">${postTotal}</span>
     </div>
        
   
