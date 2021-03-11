@@ -1,11 +1,13 @@
-import { getUsers, getPosts, usePostCollection } from "./data/DataManager.js";
+import { getUsers, getPosts, usePostCollection, getLoggedInUser, createPost } from "./data/DataManager.js";
 import { PostList } from "./feed/PostList.js";
 import { NavBar } from "./nav/NavBar.js";
 import { Footer } from "./footer/Footer.js";
+import { PostEntry } from "./feed/PostEntry.js";
 
-const EventElement = document.querySelector(".giffygram");
+//**************Creates Parent DOM Target for Page *******/
+const eventElement = document.querySelector(".giffygram");
 
-EventElement.addEventListener("click", event => {
+eventElement.addEventListener("click", event => {
   console.log("event:", event);
   if (event.target.id === "logout") {
     console.log("What did you do that for? You clicked on logout")
@@ -21,7 +23,7 @@ EventElement.addEventListener("click", event => {
 // EventElement.addEventListener("mousemove", event => {
 //   console.log(event);
 // })
-EventElement.addEventListener("change", event => {
+eventElement.addEventListener("change", event => {
   if (event.target.id === "yearSelection") {
     const yearAsNumber = parseInt(event.target.value)
     console.log(`User wants to see posts since ${yearAsNumber}`);
@@ -29,6 +31,45 @@ EventElement.addEventListener("change", event => {
     showFilteredPosts(yearAsNumber)
   }
 })
+
+eventElement.addEventListener("click", (event) => {
+  if (event.target.id === "newPost__cancel") {
+    //clear the input fields
+  }
+});
+
+eventElement.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (event.target.id === "newPost__submit") {
+    //collect the input values into an object to post to the DB
+    const title = document.querySelector("input[name='postTitle']");
+    const url = document.querySelector("input[name='postURL']");
+    const description = document.querySelector(
+      "textarea[name='postDescription']"
+    );
+    //we have not created a user yet - for now, we will hard code `1`.
+    //we can add the current time as well
+    const postObject = {
+      title: title.value,
+      imageURL: url.value,
+      description: description.value,
+      userId: getLoggedInUser.id,
+      timestamp: Date.now(),
+    };
+
+    // be sure to import from the DataManager
+    createPost(postObject).then(response => {
+      console.log("JSON Response: ", response)
+      showPostList();
+      // title.value ="Title";
+      // imageURL.value = "URL of gif";
+      // description.value = "Story behind your gif...";
+      showPostEntry();
+    }
+      )
+  }
+});
+
 const postElement = document.querySelector(".postList");
 const showFilteredPosts = (year) => {
   //get a copy of the post collection
@@ -42,16 +83,6 @@ const showFilteredPosts = (year) => {
   postElement.innerHTML = PostList(filteredData);
 }
 
-let postTotal = "";
-const showPostList = () => {
-  // Get DOM reference and save in a variable
-  getPosts().then((allPosts) => {
-    postTotal = allPosts.length;
-    console.log(postTotal);
-    postElement.innerHTML = PostList(allPosts);
-    return postTotal;
-  });
-};
 
 const showNavBar = () => {
   // Get DOM reference and save in a variable
@@ -59,18 +90,41 @@ const showNavBar = () => {
   DOMTarget.innerHTML = NavBar();
 }
 
-const showFooter = (postTotal) => {
+const showFooter = (numPosts) => {
   // Get DOM reference and save in a variable
   const DOMTarget = document.querySelector("footer");
-  console.log(postTotal);
-  console.log(Footer(postTotal));
-  DOMTarget.innerHTML = Footer(postTotal);
+  console.log(numPosts);
+  console.log(Footer(numPosts));
+  DOMTarget.innerHTML = Footer(numPosts);
 }
 
+
+const showPostList = () => {
+  // Get DOM reference and save in a variable
+  getPosts().then((allPosts) => {
+    postElement.innerHTML = PostList(allPosts);
+    
+  });
+};
+const showPostEntry = () => {
+  //Get a reference to the location on the DOM where the nav will display
+  const entryElement = document.querySelector(".entryForm");
+  entryElement.innerHTML = PostEntry();
+};
+let total = 0;
 const startGiffyGram = () => {
   showNavBar();
   showPostList();
-  showFooter(postTotal);
+  getPosts()
+    .then(response => {
+      total = usePostCollection();
+      console.log(total);
+    })
+    .then(() => {
+      showFooter(total.length)
+    console.log(total.length);
+  })
+  showPostEntry();
 };
 
 startGiffyGram();
