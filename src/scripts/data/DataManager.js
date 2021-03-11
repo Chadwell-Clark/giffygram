@@ -15,7 +15,7 @@ export const usePostCollection = () => {
   //make a copy of it and then return it
   //The spread operator makes this quick work
   let postCollectionCopy = [...postCollection]
-  return postCollectionCopy;
+  return [...postCollection];
 }
 
 export const getPosts = () => {
