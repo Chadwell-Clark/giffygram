@@ -1,3 +1,6 @@
+//  ****   Navbar HTML to be inserted in DOM by main.js
+//   ****     includes  nav elements and search
+
 export const NavBar = () => {
   return `
         <nav class="navigation">
