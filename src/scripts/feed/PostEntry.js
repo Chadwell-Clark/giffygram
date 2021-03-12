@@ -1,3 +1,5 @@
+//   ***  Post entry HTML input form  ready for export  
+
 export const PostEntry = () => {
   return `
         <form class="newPost">

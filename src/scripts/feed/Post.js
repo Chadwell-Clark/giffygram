@@ -1,3 +1,6 @@
+//   ***  Exports Post formatting of post entry object that is passed in
+//   ***    Uses properties of that object to fill in approriate data
+
 export const Post = (postObject) => {
   return `
       <section class="post">

@@ -1,3 +1,6 @@
+//   ***  Imports formatted post objects  and appends them into a HTML 
+//   ***    Collection and exports them for insertion in the DOM
+
 import { Post } from "./Post.js";
 
 export const PostList = (allPosts) => {
