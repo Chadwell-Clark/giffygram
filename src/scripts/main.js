@@ -5,12 +5,16 @@ import {
   usePostCollection,
   getLoggedInUser,
   createPost,
+  deletePost,
+  updatePost,
+  getSinglePost
+  
 } from "./data/DataManager.js";
 import { PostList } from "./feed/PostList.js";
 import { NavBar } from "./nav/NavBar.js";
 import { Footer } from "./footer/Footer.js";
 import { PostEntry } from "./feed/PostEntry.js";
-
+import { PostEdit } from "./feed/PostEdit.js";
 //**************Creates Parent DOM Target for Page *******/
 const eventElement = document.querySelector(".giffygram");
 
@@ -20,13 +24,22 @@ eventElement.addEventListener("click", (event) => {
   console.log("event:", event);
   if (event.target.id === "logout") {
     console.log("What did you do that for? You clicked on logout");
-  } else if (event.target.id.startsWith("edit")) {
-    console.log("post clicked", event.target.id.split("--"));
-    console.log("The ID is: ", event.target.id.split("--")[1]);
   } else if (event.target.id === "default") {
     console.log("Peanut Butter Fingers!!!");
   } else if (event.target.id === "directMessageIcon") {
     alert("!*! Warning this computer is infected with CIA !*!");
+  }
+});
+
+//   ***  Click Event Handler for Edit button
+eventElement.addEventListener("click", (event) => {
+  event.preventDefault();
+  window.scrollTo(0, 0);
+  if (event.target.id.startsWith("edit")) {
+    const postId = event.target.id.split("__")[1];
+    getSinglePost(postId).then((response) => {
+      showEdit(response);
+    });
   }
 });
 
@@ -45,6 +58,47 @@ eventElement.addEventListener("click", (event) => {
   if (event.target.id === "newPost__cancel") {
     //clear the input fields
     showPostEntry();
+  }
+});
+
+//   ***   Click event handler for deleting a post entry
+eventElement.addEventListener("click", event => {
+  event.preventDefault();
+  if (event.target.id.startsWith("delete")) {
+    const postId = event.target.id.split("__")[1];
+    debugger
+    deletePost(postId)
+    .then(response => {
+      showPostList();
+    })
+  }
+})
+
+//   ***  Click event handler for update a post entry
+eventElement.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (event.target.id.startsWith("updatePost")) {
+    const postId = event.target.id.split("__")[1];
+    //collect all the details into an object
+    const title = document.querySelector("input[name='postTitle']").value;
+    const url = document.querySelector("input[name='postURL']").value;
+    const description = document.querySelector(
+      "textarea[name='postDescription']"
+    ).value;
+    const timestamp = document.querySelector("input[name='postTime']").value;
+
+    const postObject = {
+      title: title,
+      imageURL: url,
+      description: description,
+      userId: getLoggedInUser().id,
+      timestamp: parseInt(timestamp),
+      id: parseInt(postId),
+    };
+    showPostEntry();
+    updatePost(postObject).then((response) => {
+      showPostList();
+    });
   }
 });
 
@@ -77,6 +131,8 @@ eventElement.addEventListener("click", (event) => {
     });
   }
 });
+
+
 
 //   ***  Render navbar in DOM at nav DOM target tag
 const showNavBar = () => {
@@ -123,6 +179,11 @@ const showPostEntry = () => {
   //Get a reference to the location on the DOM where the nav will display
   const entryElement = document.querySelector(".entryForm");
   entryElement.innerHTML = PostEntry();
+};
+
+const showEdit = (postObj) => {
+  const entryElement = document.querySelector(".entryForm");
+  entryElement.innerHTML = PostEdit(postObj);
 };
 
 //   ***  Create variable to hold total post and set to 0
