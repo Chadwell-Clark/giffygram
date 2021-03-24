@@ -9,6 +9,21 @@
       "id": 2,
       "name": "Brenda",
       "email": "brenda@bl.com"
+    },
+    {
+      "name": "dog",
+      "email": "dog@food.com",
+      "id": 3
+    },
+    {
+      "name": "snow",
+      "email": "snow@flake.dog",
+      "id": 4
+    },
+    {
+      "name": "Snowy",
+      "email": "Snowy@flake.dog",
+      "id": 5
     }
   ],
   "posts": [
@@ -21,11 +36,11 @@
       "id": 5
     },
     {
+      "title": "Enhanced global tyranny",
       "imageURL": "https://media.giphy.com/media/S2zkeFV1VwAlG/giphy.gif",
-      "userId": 1,
-      "description": "Probiscus unum, salami jalopy",
+      "description": "No story just gif",
+      "userId": 5,
       "timestamp": 1520702146000,
-      "title": "Enhanced global tyranisation",
       "id": 3
     },
     {
@@ -65,6 +80,7 @@
       "imageURL": "https://media.giphy.com/media/Zp3dDTwtkKKU8/giphy.gif",
       "description": "This is a test",
       "timestamp": 1615479680317,
+      "userId": 1,
       "id": 8
     },
     {
@@ -72,6 +88,7 @@
       "imageURL": "https://media.giphy.com/media/jn8CEXddjZYOfWE15c/giphy.gif",
       "description": "What are stickers?",
       "timestamp": 1615481135845,
+      "userId": 1,
       "id": 9
     },
     {
@@ -79,6 +96,7 @@
       "imageURL": "https://media.giphy.com/media/3ohhwlucfiPDHjqVsk/giphy.gif",
       "description": "I was out for a drive and found myself at the corner of nebula and event horizon. There was only one way to go...",
       "timestamp": 1615482030247,
+      "userId": 1,
       "id": 10
     },
     {
@@ -86,6 +104,7 @@
       "imageURL": "https://media.giphy.com/media/CvgezXSuQTMTC/giphy.gif",
       "description": "What will happen?",
       "timestamp": 1615482971803,
+      "userId": 1,
       "id": 11
     },
     {
@@ -93,6 +112,7 @@
       "imageURL": "https://media.giphy.com/media/42mCrHvA2CoF2/giphy.gif",
       "description": "test to see I can use showPostEntry to get to default placeholders",
       "timestamp": 1615484058019,
+      "userId": 1,
       "id": 12
     },
     {
@@ -107,6 +127,7 @@
       "title": "",
       "imageURL": "",
       "description": "",
+      "userId": 1,
       "timestamp": 1615484088866,
       "id": 14
     },
@@ -115,6 +136,7 @@
       "imageURL": "https://media.giphy.com/media/fy5iARUXimtVK/giphy.gif",
       "description": "Heavy cat jams",
       "timestamp": 1616517519135,
+      "userId": 1,
       "id": 19
     },
     {
@@ -130,7 +152,24 @@
       "imageURL": "https://media.giphy.com/media/l41JLDgMIwnGOaC0o/giphy.gif",
       "description": "No story just Jerry",
       "timestamp": 1616553139078,
+      "userId": 1,
       "id": 21
+    },
+    {
+      "title": "Snowies first post",
+      "imageURL": "https://media.giphy.com/media/jp2KXzsPtoKFG/giphy.gif",
+      "description": "Snowy the flake is a dog",
+      "userId": 5,
+      "timestamp": 1616604224419,
+      "id": 22
+    },
+    {
+      "title": "snowy test",
+      "imageURL": "https://media.giphy.com/media/Fu3OjBQiCs3s0ZuLY3/giphy.gif",
+      "description": "test",
+      "userId": 5,
+      "timestamp": 1616604766811,
+      "id": 23
     }
   ],
   "messages": []

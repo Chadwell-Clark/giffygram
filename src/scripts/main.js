@@ -7,7 +7,11 @@ import {
   createPost,
   deletePost,
   updatePost,
-  getSinglePost
+  getSinglePost,
+  logoutUser,
+  loginUser,
+  setLoggedInUser,
+  registerUser
   
 } from "./data/DataManager.js";
 import { PostList } from "./feed/PostList.js";
@@ -15,27 +19,33 @@ import { NavBar } from "./nav/NavBar.js";
 import { Footer } from "./footer/Footer.js";
 import { PostEntry } from "./feed/PostEntry.js";
 import { PostEdit } from "./feed/PostEdit.js";
+import { LoginForm } from "./auth/LoginForm.js";
+import { RegisterForm } from "./auth/RegisterForm.js";
+
 //**************Creates Parent DOM Target for Page *******/
 const eventElement = document.querySelector(".giffygram");
 
 //   ***   Click event handlers for  Nav events
 
 eventElement.addEventListener("click", (event) => {
-  console.log("event:", event);
-  if (event.target.id === "logout") {
-    console.log("What did you do that for? You clicked on logout");
-  } else if (event.target.id === "default") {
-    console.log("Peanut Butter Fingers!!!");
-  } else if (event.target.id === "directMessageIcon") {
-    alert("!*! Warning this computer is infected with CIA !*!");
-  }
+     if (event.target.id === "logout") {
+       logoutUser();
+       console.log(getLoggedInUser());
+       sessionStorage.clear();
+       checkForUser();
+     }
+  // } else if (event.target.id === "default") {
+  //   console.log("Peanut Butter Fingers!!!");
+  // } else if (event.target.id === "directMessageIcon") {
+  //   alert("!*! Warning this computer is infected with CIA !*!");
+  // }
 });
 
 //   ***  Click Event Handler for Edit button
 eventElement.addEventListener("click", (event) => {
   event.preventDefault();
-  window.scrollTo(0, 0);
   if (event.target.id.startsWith("edit")) {
+    window.scrollTo(0, 0);
     const postId = event.target.id.split("__")[1];
     getSinglePost(postId)
     .then((response) => {
@@ -119,7 +129,7 @@ eventElement.addEventListener("click", (event) => {
       title: title.value,
       imageURL: url.value,
       description: description.value,
-      userId: getLoggedInUser.id,
+      userId: getLoggedInUser().id,
       timestamp: Date.now(),
     };
 
@@ -182,9 +192,69 @@ const showPostEntry = () => {
   entryElement.innerHTML = PostEntry();
 };
 
+eventElement.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (event.target.id === "login__submit") {
+    //collect all the details into an object
+    const userObject = {
+      name: document.querySelector("input[name='name']").value,
+      email: document.querySelector("input[name='email']").value,
+    };
+    loginUser(userObject).then((dbUserObj) => {
+      if (dbUserObj) {
+        sessionStorage.setItem("user", JSON.stringify(dbUserObj));
+        startGiffyGram();
+      } else {
+        //got a false value - no user
+        const entryElement = document.querySelector(".entryForm");
+        entryElement.innerHTML = `<p class="center">That user does not exist. Please try again or register for your free account.</p> ${LoginForm()} <hr/> <hr/> ${RegisterForm()}`;
+      }
+    });
+  }
+});
+
+eventElement.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (event.target.id === "register__submit") {
+    //collect all the details into an object
+    const userObject = {
+      name: document.querySelector("input[name='registerName']").value,
+      email: document.querySelector("input[name='registerEmail']").value,
+    };
+    registerUser(userObject).then((dbUserObj) => {
+      sessionStorage.setItem("user", JSON.stringify(dbUserObj));
+      startGiffyGram();
+    });
+  }
+});
+//   ***  Function to check for user in sessionStorage
+//   ***  If there is a user setLoggedInUser to user
+//   ***  If not get user to register
+const checkForUser = () => {
+  if (sessionStorage.getItem("user")) {
+    //   ***  setLoggedInUser expects object
+    //   ***   get user item from sessionStorage
+    //   ***  parse session storage string into an object
+    setLoggedInUser(JSON.parse(sessionStorage.getItem("user")));
+    startGiffyGram();
+  } else {
+   showLoginRegister();
+  }
+};
+
+const showLoginRegister = () => {
+  showNavBar();
+  const entryElement = document.querySelector(".entryForm");
+  //template strings can be used here too
+  entryElement.innerHTML = `${LoginForm()} <hr/> <hr/> ${RegisterForm()}`;
+  //make sure the post list is cleared out too
+  const postElement = document.querySelector(".postList");
+  postElement.innerHTML = "";
+};
+
 const showEdit = (postObj) => {
   const entryElement = document.querySelector(".entryForm");
-  entryElement.innerHTML = PostEdit(postObj);
+  entryElement.innerHTML = PostEntry(postObj);
 };
 
 //   ***  Create variable to hold total post and set to 0
@@ -207,5 +277,8 @@ const startGiffyGram = () => {
   showPostEntry();
 };
 
-//   ***  Start GiffyGram App
-startGiffyGram();
+// //   ***  Start GiffyGram App
+// startGiffyGram();
+
+
+checkForUser();
