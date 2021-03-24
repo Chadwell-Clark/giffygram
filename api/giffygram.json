@@ -13,7 +13,7 @@
   ],
   "posts": [
     {
-      "title": "You Deserve Slack! Yes You do!",
+      "title": "You Deserve Slack! Yes You do! Yes you do! Hail Bob",
       "imageURL": "https://media.giphy.com/media/kf7SvRAUB25Ww/giphy.gif",
       "description": "BOB... Always has been. ",
       "userId": 1,
@@ -116,6 +116,21 @@
       "description": "Heavy cat jams",
       "timestamp": 1616517519135,
       "id": 19
+    },
+    {
+      "title": "I changed it!",
+      "imageURL": "https://media.giphy.com/media/fy5iARUXimtVK/giphy.gif",
+      "description": "COOL",
+      "userId": 1,
+      "timestamp": 1616532680427,
+      "id": 20
+    },
+    {
+      "title": "Jerry",
+      "imageURL": "https://media.giphy.com/media/l41JLDgMIwnGOaC0o/giphy.gif",
+      "description": "No story just Jerry",
+      "timestamp": 1616553139078,
+      "id": 21
     }
   ],
   "messages": []
