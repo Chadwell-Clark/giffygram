@@ -37,7 +37,8 @@ eventElement.addEventListener("click", (event) => {
   window.scrollTo(0, 0);
   if (event.target.id.startsWith("edit")) {
     const postId = event.target.id.split("__")[1];
-    getSinglePost(postId).then((response) => {
+    getSinglePost(postId)
+    .then((response) => {
       showEdit(response);
     });
   }
