@@ -12,7 +12,8 @@ import {
   setLoggedInUser,
   registerUser,
   getSingleUserPosts,
-  postLike
+  postLike,
+  getLikes
   
 } from "./data/DataManager.js";
 import { PostList } from "./feed/PostList.js";
@@ -157,9 +158,14 @@ eventElement.addEventListener("click", (event) => {
       postId: event.target.id.split("__")[1],
       userId: getLoggedInUser().id,
     };
-    postLike(likeObject).then((response) => {
-      showPostList();
-    });
+    postLike(likeObject).then(() => {
+      console.log('likeObject', likeObject);
+      getLikes(likeObject.postId).then((response) => {
+        document.querySelector(
+          `#likes__${likeObject.postId}`
+        ).innerHTML = `🌞  ${response.length}`;
+      });
+    })
   }
 });
 
