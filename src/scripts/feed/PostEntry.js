@@ -37,8 +37,12 @@ let title = "",
   postPartC = "";
 
 export const PostEntry = (postObj) => {
+    console.log(postObj)
   if (postObj === undefined) {
-    postPartA = `<form class="newPost">`;
+      title = "",
+        imgURL = "",
+        desc = "",
+        postPartA = `<form class="newPost">`;
     postPartC = `<button id="newPost__submit">Save</button>
             <button id="newPost__cancel">Cancel</button>
         </form>`;
@@ -54,7 +58,7 @@ export const PostEntry = (postObj) => {
     imgURL = postObj.imageURL;
     desc = postObj.description;
   }
-//   console.log("title: ", title, "IMG: ", imgURL, "description: ", desc);
+  console.log("title: ", title, "IMG: ", imgURL, "description: ", desc);
   return `
     ${postPartA}
     <div>
@@ -72,9 +76,9 @@ export const PostEntry = (postObj) => {
 				   placeholder="URL of gif" />
 		</div>
 
-    	<textarea value="${desc}"name="postDescription"
+    	<textarea name="postDescription"
     	class="newPost__input newPost__description"
-    	placeholder="Story behind your gif..."></textarea>
+    	placeholder="Story behind your gif...">${desc}</textarea>
         ${postPartC}
     `;
 };

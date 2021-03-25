@@ -14,7 +14,6 @@ export const getUsers = () => {
   // });
 };
 
-
 //   ***  Variable for post entry database   
 let postCollection = [];
 
@@ -39,6 +38,19 @@ export const getPosts = () => {
       return parsedResponse;
     });
 };
+
+export const getSingleUserPosts = () => {
+  console.log(loggedInUser.id)
+  return fetch(
+    `http://localhost:8088/posts?userId=${loggedInUser.id}&_expand=user`
+  )
+    .then((response) => response.json())
+    .then((parsedResponse) => {
+      console.log("singleUserPosts: ", parsedResponse);
+      postCollection = parsedResponse;
+      return parsedResponse;
+    });
+}
 
 //   ***   POST new post entry to the JSON database  and export  
 export const createPost = (postObj) => {

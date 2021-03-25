@@ -1,8 +1,9 @@
+import { getLoggedInUser } from "../data/DataManager.js"
 //   ***  Exports Post formatting of post entry object that is passed in
 //   ***    Uses properties of that object to fill in approriate data
 
 export const Post = (postObject) => {
-  // console.log(postObject)
+  // console.log("Post-object: ", postObject)
   const date = new Date(postObject.timestamp);
   const datePosted = `${date
     .toLocaleString("en-US", { weekday: "short" })
@@ -11,8 +12,15 @@ export const Post = (postObject) => {
   }/${date.getDate()}/${date.getFullYear()} ${date.getHours()
   }:${date.getMinutes()}:${date.getSeconds()}`;
 
-  console.log(datePosted);
-
+  // console.log(datePosted);
+  const loggedInUser = getLoggedInUser();
+  let deleteEditBtns = ""
+  if (loggedInUser.id === postObject.userId) {
+    deleteEditBtns = `
+    <button id="delete__${postObject.id}">Delete</button>
+        <button id="edit__${postObject.id}">Edit</button>
+    `;
+  }
   return `
       <section class="post">
         <header>
@@ -21,8 +29,7 @@ export const Post = (postObject) => {
         <img class="post__image" src="${postObject.imageURL}" alt="${postObject.description}" />
         <p>Posted by: ${postObject.user.name}</p>
         <p>Posted : ${datePosted}</p>
-        <button id="delete__${postObject.id}">Delete</button>
-        <button id="edit__${postObject.id}">Edit</button>
+       ${deleteEditBtns}
       </section>
     `;
 };

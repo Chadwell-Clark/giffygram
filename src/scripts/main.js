@@ -11,7 +11,8 @@ import {
   logoutUser,
   loginUser,
   setLoggedInUser,
-  registerUser
+  registerUser,
+  getSingleUserPosts
   
 } from "./data/DataManager.js";
 import { PostList } from "./feed/PostList.js";
@@ -26,7 +27,6 @@ import { RegisterForm } from "./auth/RegisterForm.js";
 const eventElement = document.querySelector(".giffygram");
 
 //   ***   Click event handlers for  Nav events
-
 eventElement.addEventListener("click", (event) => {
      if (event.target.id === "logout") {
        logoutUser();
@@ -34,11 +34,17 @@ eventElement.addEventListener("click", (event) => {
        sessionStorage.clear();
        checkForUser();
      }
-  // } else if (event.target.id === "default") {
-  //   console.log("Peanut Butter Fingers!!!");
-  // } else if (event.target.id === "directMessageIcon") {
-  //   alert("!*! Warning this computer is infected with CIA !*!");
-  // }
+   else if (event.target.id === "default") {
+    console.log("Peanut Butter Fingers!!!");
+  } else if (event.target.id === "directMessageIcon") {
+    alert("!*! Warning this computer is infected with CIA !*!");
+  } else if (event.target.id === "loggedInUsersPosts") {
+    console.log("get single user posts")
+    getSingleUserPosts()
+    .then(userPosts => {
+      postElement.innerHTML = PostList(userPosts);
+    })
+  }
 });
 
 //   ***  Click Event Handler for Edit button

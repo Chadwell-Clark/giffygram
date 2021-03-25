@@ -24,6 +24,16 @@
       "name": "Snowy",
       "email": "Snowy@flake.dog",
       "id": 5
+    },
+    {
+      "name": "red",
+      "email": "red@red.red",
+      "id": 6
+    },
+    {
+      "name": "Monica",
+      "email": "monica@hey.com",
+      "id": 7
     }
   ],
   "posts": [
@@ -124,10 +134,10 @@
       "id": 13
     },
     {
-      "title": "",
-      "imageURL": "",
-      "description": "",
-      "userId": 1,
+      "title": "Story time children",
+      "imageURL": "https://media.giphy.com/media/Idz7cyLRe2bVm/giphy.gif",
+      "description": "Just kidding. No Story just GIF",
+      "userId": 5,
       "timestamp": 1615484088866,
       "id": 14
     },
@@ -170,6 +180,22 @@
       "userId": 5,
       "timestamp": 1616604766811,
       "id": 23
+    },
+    {
+      "title": "Red alert Rouge Achtung",
+      "imageURL": "https://media.giphy.com/media/WRWyfIWXpnoXgK2Pcj/giphy.gif",
+      "description": "Red red red red red REEED",
+      "userId": 6,
+      "timestamp": 1616623194953,
+      "id": 24
+    },
+    {
+      "title": "Don't mind Chaos",
+      "imageURL": "https://media.giphy.com/media/1n4iuWZFnTeN6qvdpD/giphy.gif",
+      "description": "",
+      "userId": 7,
+      "timestamp": 1616632318741,
+      "id": 25
     }
   ],
   "messages": []
