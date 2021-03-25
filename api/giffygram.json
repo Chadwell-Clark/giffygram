@@ -196,7 +196,95 @@
       "userId": 7,
       "timestamp": 1616632318741,
       "id": 25
+    },
+    {
+      "title": "Mind wave dirigible",
+      "imageURL": "https://media.giphy.com/media/xUPGcKLhKfyxULQEZa/giphy.gif",
+      "description": "What can I say?",
+      "userId": 7,
+      "timestamp": 1616633562950,
+      "id": 26
+    },
+    {
+      "title": "Moving right along",
+      "imageURL": "https://media.giphy.com/media/93uYptVAHE7C0/giphy.gif",
+      "description": "Moving Right along",
+      "userId": 7,
+      "timestamp": 1616695823877,
+      "id": 27
     }
   ],
-  "messages": []
+  "messages": [],
+  "userLikes": [
+    {
+      "postId": "6",
+      "userId": 1,
+      "id": 1
+    },
+    {
+      "postId": "5",
+      "userId": 1,
+      "id": 2
+    },
+    {
+      "postId": "5",
+      "userId": 1,
+      "id": 3
+    },
+    {
+      "postId": "5",
+      "userId": 1,
+      "id": 4
+    },
+    {
+      "postId": "5",
+      "userId": 1,
+      "id": 5
+    },
+    {
+      "postId": "26",
+      "userId": 7,
+      "id": 6
+    },
+    {
+      "postId": "26",
+      "userId": 7,
+      "id": 7
+    },
+    {
+      "postId": "25",
+      "userId": 7,
+      "id": 8
+    },
+    {
+      "postId": "27",
+      "userId": 7,
+      "id": 9
+    },
+    {
+      "postId": "27",
+      "userId": 7,
+      "id": 10
+    },
+    {
+      "postId": "5",
+      "userId": 7,
+      "id": 11
+    },
+    {
+      "postId": "3",
+      "userId": 7,
+      "id": 12
+    },
+    {
+      "postId": "25",
+      "userId": 7,
+      "id": 13
+    },
+    {
+      "postId": "4",
+      "userId": 7,
+      "id": 14
+    }
+  ]
 }

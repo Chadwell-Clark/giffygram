@@ -95,6 +95,25 @@ export const updatePost = (postObj) => {
   .then((response) => response.json())
   .then(getPosts);
 };
+//   ***  POST a like to a post 
+export const postLike = (likeObject) => {
+  return fetch(`http://localhost:8088/userLikes/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(likeObject),
+  })
+    .then((response) => response.json())
+    .then(getPosts);
+};
+
+//   ***  GET likes for a post
+export const getLikes = (postId) => {
+  return fetch(
+    `http://localhost:8088/userLikes?postId=${postId}`
+  ).then((response) => response.json());
+};
 
 //   ***  Current user object for testing   
 let loggedInUser = {}
