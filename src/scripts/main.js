@@ -1,6 +1,5 @@
 //   ***  Import from modules functions needed
 import {
-  getUsers,
   getPosts,
   usePostCollection,
   getLoggedInUser,
@@ -12,14 +11,14 @@ import {
   loginUser,
   setLoggedInUser,
   registerUser,
-  getSingleUserPosts
+  getSingleUserPosts,
+  postLike
   
 } from "./data/DataManager.js";
 import { PostList } from "./feed/PostList.js";
 import { NavBar } from "./nav/NavBar.js";
 import { Footer } from "./footer/Footer.js";
 import { PostEntry } from "./feed/PostEntry.js";
-import { PostEdit } from "./feed/PostEdit.js";
 import { LoginForm } from "./auth/LoginForm.js";
 import { RegisterForm } from "./auth/RegisterForm.js";
 
@@ -47,7 +46,17 @@ eventElement.addEventListener("click", (event) => {
   }
 });
 
-//   ***  Click Event Handler for Edit button
+//   ***  Change event handler for Footer Year selector
+eventElement.addEventListener("change", (event) => {
+  if (event.target.id === "yearSelection") {
+    const yearAsNumber = parseInt(event.target.value);
+    // console.log(`User wants to see posts since ${yearAsNumber}`);
+    //invoke a filter function passing the year as an argument
+    showFilteredPosts(yearAsNumber);
+  }
+});
+
+//   ***  Click Event Handler for Edit button  ***   //
 eventElement.addEventListener("click", (event) => {
   event.preventDefault();
   if (event.target.id.startsWith("edit")) {
@@ -60,17 +69,8 @@ eventElement.addEventListener("click", (event) => {
   }
 });
 
-//   ***  Change event handler for Footer Year selector
-eventElement.addEventListener("change", (event) => {
-  if (event.target.id === "yearSelection") {
-    const yearAsNumber = parseInt(event.target.value);
-    // console.log(`User wants to see posts since ${yearAsNumber}`);
-    //invoke a filter function passing the year as an argument
-    showFilteredPosts(yearAsNumber);
-  }
-});
 
-//   ***   Click event handler for cancelling  a post entry
+//   ***   Click event handler for cancelling  a post entry  ***   //
 eventElement.addEventListener("click", (event) => {
   if (event.target.id === "newPost__cancel") {
     //clear the input fields
@@ -78,7 +78,7 @@ eventElement.addEventListener("click", (event) => {
   }
 });
 
-//   ***   Click event handler for deleting a post entry
+//   ***   Click event handler for deleting a post entry  ***   //
 eventElement.addEventListener("click", event => {
   event.preventDefault();
   if (event.target.id.startsWith("delete")) {
@@ -149,6 +149,19 @@ eventElement.addEventListener("click", (event) => {
   }
 });
 
+//   ***  Click event handler for submitting a like to a post
+eventElement.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (event.target.id.startsWith("like")) {
+    const likeObject = {
+      postId: event.target.id.split("__")[1],
+      userId: getLoggedInUser().id,
+    };
+    postLike(likeObject).then((response) => {
+      showPostList();
+    });
+  }
+});
 
 
 //   ***  Render navbar in DOM at nav DOM target tag
@@ -197,7 +210,7 @@ const showPostEntry = () => {
   const entryElement = document.querySelector(".entryForm");
   entryElement.innerHTML = PostEntry();
 };
-
+//   ***  Click Event handler for submit button  ***   //
 eventElement.addEventListener("click", (event) => {
   event.preventDefault();
   if (event.target.id === "login__submit") {
@@ -219,6 +232,7 @@ eventElement.addEventListener("click", (event) => {
   }
 });
 
+//   ***  Click Event handler for Register submit button  ***   //
 eventElement.addEventListener("click", (event) => {
   event.preventDefault();
   if (event.target.id === "register__submit") {
@@ -233,12 +247,13 @@ eventElement.addEventListener("click", (event) => {
     });
   }
 });
-//   ***  Function to check for user in sessionStorage
-//   ***  If there is a user setLoggedInUser to user
-//   ***  If not get user to register
+
+//   ***  Function to check for user in sessionStorage  ***   //
+//   ***  If there is a user setLoggedInUser to user  ***   //
+//   ***  If not get user to login or register  ***   //
 const checkForUser = () => {
   if (sessionStorage.getItem("user")) {
-    //   ***  setLoggedInUser expects object
+    //   ***  setLoggedInUser(expects object)
     //   ***   get user item from sessionStorage
     //   ***  parse session storage string into an object
     setLoggedInUser(JSON.parse(sessionStorage.getItem("user")));
@@ -248,6 +263,7 @@ const checkForUser = () => {
   }
 };
 
+//   ***  Show Login/Register forms if no one is logged in  ***   //
 const showLoginRegister = () => {
   showNavBar();
   const entryElement = document.querySelector(".entryForm");
@@ -258,6 +274,7 @@ const showLoginRegister = () => {
   postElement.innerHTML = "";
 };
 
+//   ***  Show Post Entry with edit options enabled  ***   //
 const showEdit = (postObj) => {
   const entryElement = document.querySelector(".entryForm");
   entryElement.innerHTML = PostEntry(postObj);

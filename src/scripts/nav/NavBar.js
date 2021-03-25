@@ -20,7 +20,6 @@ export const NavBar = () => {
                 <button id="logout" class="fakeLink">Logout</button>
                 </div>
                 <div class ="navigation__item navigation__getMyPosts">
-                <button id="loggedInUsersPosts" class="loggedInUsersPosts">Get My Posts</button>
                 </div>
         </nav>
     `;

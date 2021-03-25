@@ -39,21 +39,21 @@ let title = "",
 export const PostEntry = (postObj) => {
     console.log(postObj)
   if (postObj === undefined) {
-      title = "",
-        imgURL = "",
-        desc = "",
-        postPartA = `<form class="newPost">`;
+    title = ""
+    imgURL = ""
+    desc = ""
+    postPartA = `<form class="newPost">`;
     postPartC = `<button id="newPost__submit">Save</button>
-            <button id="newPost__cancel">Cancel</button>
-        </form>`;
+                 <button id="newPost__cancel">Cancel</button>
+                 </form>`;
   } else {
     postPartA = `<div class="newPost">
-	        <h3>Edit This Post</h3>`;
+	               <h3>Edit This Post</h3>`;
     postPartC = `<input type="hidden" value="${postObj.id}" name="postId">
-		    <input type="hidden" value="${postObj.timestamp}" name="postTime">	
-		    <button id="updatePost__${postObj.id}">Update</button>
-		    <button id="newPost__cancel">Cancel</button>
-	        </div>`;
+		             <input type="hidden" value="${postObj.timestamp}" name="postTime">	
+		             <button id="updatePost__${postObj.id}">Update</button>
+		            <button id="newPost__cancel">Cancel</button>
+	              </div>`;
     title = postObj.title;
     imgURL = postObj.imageURL;
     desc = postObj.description;
