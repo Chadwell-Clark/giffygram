@@ -24,8 +24,8 @@ export const Post = (postObject) => {
   let deleteEditBtns = ""
   if (loggedInUser.id === postObject.userId) {
     deleteEditBtns = `
-    <button id="delete__${postObject.id}">Delete</button>
-        <button id="edit__${postObject.id}">Edit</button>
+    <div><button id="delete__${postObject.id}">Delete</button></div>
+        <div><button id="edit__${postObject.id}">Edit</button></div>
     `;
   }
   return `
@@ -36,13 +36,13 @@ export const Post = (postObject) => {
         <img class="post__image" src="${postObject.imageURL}" alt="${
     postObject.description
   }" />
-        <p>Posted by: ${postObject.user.name}</p>
-        <p>Posted : ${datePosted}</p>
-       ${deleteEditBtns}
+        <div><p>${postObject.user.name}</p></div>
+        <div><p>${datePosted}</p></div>
+        <div class="postBtns">
+       <div>${deleteEditBtns}</div>
        <button id="like__${postObject.id}">Like</button>
-       <p id="likes__${postObject.id}">🌞 ${getNumberOfLikes(
-    postObject.id
-  )}</p>
+       <p id="likes__${postObject.id}">🌞 ${getNumberOfLikes(postObject.id)}</p>
+       <div>
       </section>
     `;
 };
