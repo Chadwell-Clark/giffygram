@@ -29,14 +29,28 @@ export const usePostCollection = () => {
 //   ***  GET Post entries for current User  
 //   ***    from JSON database and export  
 export const getPosts = () => {
-  return fetch("http://localhost:8088/posts")
-  .then((response) => response.json())
-  .then(parsedResponse => {
-      // do something with response here
+  // const userId = getLoggedInUser().id;
+  return fetch(`http://localhost:8088/posts?_expand=user`)
+    .then((response) => response.json())
+    .then((parsedResponse) => {
+      console.log("data with user", parsedResponse);
       postCollection = parsedResponse;
       return parsedResponse;
-  })
+    });
 };
+
+export const getSingleUserPosts = () => {
+  console.log(loggedInUser.id)
+  return fetch(
+    `http://localhost:8088/posts?userId=${loggedInUser.id}&_expand=user`
+  )
+    .then((response) => response.json())
+    .then((parsedResponse) => {
+      console.log("singleUserPosts: ", parsedResponse);
+      postCollection = parsedResponse;
+      return parsedResponse;
+    });
+}
 
 //   ***   POST new post entry to the JSON database  and export  
 export const createPost = (postObj) => {
@@ -65,7 +79,7 @@ export const deletePost = (postId => {
 export const getSinglePost = (postId) => {
   return fetch(`http://localhost:8088/posts/${postId}`)
   .then((response) =>
-    response.json()
+  response.json()
   );
 };
 
@@ -78,19 +92,56 @@ export const updatePost = (postObj) => {
     },
     body: JSON.stringify(postObj),
   })
-    .then((response) => response.json())
-    .then(getPosts);
+  .then((response) => response.json())
+  .then(getPosts);
 };
 
 //   ***  Current user object for testing   
-const loggedInUser = {
-	id: 1,
-	name: "Bryan",
-	email: "bryan@bn.com"
-}
+let loggedInUser = {}
+
+  export const getLoggedInUser = () => {
+    return {...loggedInUser}
+  }
+  //   ***  Sets the user
+  export const setLoggedInUser = (userObj) => {
+    loggedInUser = userObj;
+  }
+  
+  //   ***  Get Logged in User and Export   
+  export const logoutUser = () => {
+    loggedInUser = {};
+  }
+  
+  export const loginUser = (userObj) => {
+    return fetch(
+      `http://localhost:8088/users?name=${userObj.name}&email=${userObj.email}`
+    )
+      .then((response) => response.json())
+      .then((parsedUser) => {
+        //is there a user?
+        console.log("parsedUser", parsedUser); //data is returned as an array
+        if (parsedUser.length > 0) {
+          setLoggedInUser(parsedUser[0]);
+          return getLoggedInUser();
+        } else {
+          //no user
+          return false;
+        }
+      });
+  };
 
 
-//   ***  Get Logged in User and Export   
-export const getLoggedInUser = () => {
-	return {...loggedInUser};
-}
+  export const registerUser = (userObj) => {
+    return fetch(`http://localhost:8088/users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userObj),
+    })
+      .then((response) => response.json())
+      .then((parsedUser) => {
+        setLoggedInUser(parsedUser);
+        return getLoggedInUser();
+      });
+  };

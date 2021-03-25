@@ -18,7 +18,10 @@ export const NavBar = () => {
             </div>
             <div class="navigation__item navigation__logout">
                 <button id="logout" class="fakeLink">Logout</button>
-            </div>
+                </div>
+                <div class ="navigation__item navigation__getMyPosts">
+                <button id="loggedInUsersPosts" class="loggedInUsersPosts">Get My Posts</button>
+                </div>
         </nav>
     `;
 };

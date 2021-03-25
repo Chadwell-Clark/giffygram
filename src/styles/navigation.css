@@ -70,6 +70,10 @@
     margin-right: 2em;
 }
 
+.navigation__getMyPosts {
+    margin-right:2em;
+}
+
 #directMessageIcon {
     cursor: pointer;
 }
