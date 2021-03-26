@@ -43,6 +43,7 @@ eventElement.addEventListener("click", (event) => {
     getSingleUserPosts()
     .then(userPosts => {
       postElement.innerHTML = PostList(userPosts);
+      document.querySelector("#loggedInUsersPosts").innerHTML = "Get All Posts";
     })
   }
 });
