@@ -153,7 +153,7 @@ eventElement.addEventListener("click", (event) => {
 //   ***  Click event handler for submitting a like to a post
 eventElement.addEventListener("click", (event) => {
   event.preventDefault();
-  if (event.target.id.startsWith("like")) {
+  if (event.target.id.startsWith("like_")) {
     const likeObject = {
       postId: event.target.id.split("__")[1],
       userId: getLoggedInUser().id,

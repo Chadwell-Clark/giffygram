@@ -67,7 +67,21 @@
     font-size: 1.0em;
     margin: 1em 0 0.5em 0;
 }
+.post__info {
+    display:flex;
+    justify-content: space-evenly;
+}
 
+.post__btns{
+    display: flex;
+    justify-content: space-evenly;
+}
+.like__icon {
+    border: 1px solid #404040;
+    background: #EFEFEF;
+    padding: .15rem .7rem;
+    border-radius: 2px;
+}
 .post__remark {
     font-size: 2em;
     margin: 1em 0 0.5em 0;
@@ -75,4 +89,5 @@
 
 .postList {
     margin-bottom: 5em;
+    background:rgb(215, 247, 247);
 }

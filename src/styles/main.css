@@ -11,8 +11,12 @@ body, button, input, select, textarea {
     font-family: "Comfortaa", Arial, sans-serif;
     font-size: 1rem;
     line-height: 1.5;
-    padding: 0;
+    padding: .1rem .6rem;
     margin: 0;
+}
+
+body {
+    background:rgb(215, 247, 247);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -50,4 +54,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .entryForm {
     margin-top: 5em;
+}
+
+.post__btns buttons {
+    margin:7rem 7rem;
+
 }

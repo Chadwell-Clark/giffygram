@@ -36,13 +36,13 @@ export const Post = (postObject) => {
         <img class="post__image" src="${postObject.imageURL}" alt="${
     postObject.description
   }" />
-        <div><p>${postObject.user.name}</p></div>
-        <div><p>${datePosted}</p></div>
-        <div class="postBtns">
-       <div>${deleteEditBtns}</div>
-       <button id="like__${postObject.id}">Like</button>
-       <p id="likes__${postObject.id}">🌞 ${getNumberOfLikes(postObject.id)}</p>
-       <div>
+        <div class="post__info"><div><p>${postObject.user.name}</p></div>
+        <div><p>${datePosted}</p></div></div>
+        <div class="post__btns">
+       ${deleteEditBtns}
+       <div><button id="like__${postObject.id}">Like</button></div>
+       <div><div class="like__icon" id="likes__${postObject.id}">🌞 ${getNumberOfLikes(postObject.id)}</div></div>
+       </div>
       </section>
     `;
 };
